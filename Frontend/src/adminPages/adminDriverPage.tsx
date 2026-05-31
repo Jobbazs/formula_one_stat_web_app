@@ -31,7 +31,8 @@ const EMPTY_FORM: DriverForm = {
 };
 
 const API_BASE = "https://formulaonestatwebapp-production.up.railway.app/api";
-const SANCTUM_URL = "http://localhost:8000/sanctum/csrf-cookie";
+const SANCTUM_URL =
+  "http://https://formulaonestatwebapp-production.up.railway.app/sanctum/csrf-cookie";
 
 function AdminDriverPage() {
   const navigate = useNavigate();

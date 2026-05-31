@@ -79,21 +79,21 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
 
   useEffect(() => {
     fetch(https://formulaonestatwebapp-production.up.railway.app
-      "https://formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/driver/",
+      "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
     )
       .then((r) => r.json())
       .then(setDrivers)
       .catch(console.error);
 
     fetch(
-      "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/constructor/",
+      "https://formulaonestatwebapp-production.up.railway.app/api/constructor/",
     )
       .then((r) => r.json())
       .then(setConstructors)
       .catch(console.error);
 
     fetch(
-      "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers",
+      "https://formulaonestatwebapp-production.up.railway.app/api/statistics/standings/drivers",
     )
       .then((r) => r.json())
       .then(setStandings)
@@ -103,14 +103,14 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   useEffect(() => {
     if (tab === "drivers") {
       fetch(
-        "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers",
+        "https://formulaonestatwebapp-production.up.railway.app/api/statistics/standings/drivers",
       )
         .then((r) => r.json())
         .then(setStandings)
         .catch(console.error);
     } else {
       fetch(
-        "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/constructors",
+        "https://formulaonestatwebapp-production.up.railway.app/api/statistics/standings/constructors",
       )
         .then((r) => r.json())
         .then(setStandings)
@@ -126,7 +126,7 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
     setSelectedDriver(id);
     setStatsLoading(true);
     fetch(
-      `formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/driver/${id}`,
+      `https://formulaonestatwebapp-production.up.railway.app/api/statistics/driver/${id}`,
     )
       .then((r) => r.json())
       .then((data) => {
@@ -140,7 +140,7 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
     setSelectedConstructor(id);
     setStatsLoading(true);
     fetch(
-      `formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/constructor/${id}`,
+      `https://formulaonestatwebapp-production.up.railway.app/api/statistics/constructor/${id}`,
     )
       .then((r) => r.json())
       .then((data) => {

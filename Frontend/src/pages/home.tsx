@@ -81,9 +81,9 @@ export default function HomePage() {
             "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
           ),https://formulaonestatwebapp-production.up.railway.app
           fetch(
-            "formhttps://formulaonestatwebapp-production.up.railway.app/constructor/",
+            "https://formulaonestatwebapp-production.up.railway.app/constructor/",
           ),
-          fetch("formulaonestatwebapp-production.up.railway.app/api/news"),
+          fetch("https://formulaonestatwebapp-production.up.railway.app/api/news"),
         ]);
 
         setDrivers(await driversRes.json());

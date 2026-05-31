@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/login.css"
+import "../styles/login.css";
 
 interface LoginPageProps {
   onLoginSuccess: () => void;
@@ -9,12 +9,16 @@ interface LoginPageProps {
 function LoginPage({ onLoginSuccess }: LoginPageProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
-  const [loading, setLoading] = useState(false); 
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
+    {},
+  );
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const getCookie = (name: string) => {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    const match = document.cookie.match(
+      new RegExp("(^| )" + name + "=([^;]+)"),
+    );
     if (match) return decodeURIComponent(match[2]);
     return null;
   };
@@ -25,7 +29,8 @@ function LoginPage({ onLoginSuccess }: LoginPageProps) {
     else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid";
 
     if (!password) newErrors.password = "Password is required";
-    else if (password.length < 4) newErrors.password = "Password must be at least 4 characters";
+    else if (password.length < 4)
+      newErrors.password = "Password must be at least 4 characters";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -37,23 +42,29 @@ function LoginPage({ onLoginSuccess }: LoginPageProps) {
     setLoading(true);
 
     try {
-      await fetch("http://localhost:8000/sanctum/csrf-cookie", {
-        method: "GET",
-        credentials: "include"
-      });
-
-      const csrfToken = getCookie('XSRF-TOKEN');
-
-      const response = await fetch("http://localhost:8000/api/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "X-XSRF-TOKEN": csrfToken || ""
+      await fetch(
+        "http://https://formulaonestatwebapp-production.up.railway.app/sanctum/csrf-cookie",
+        {
+          method: "GET",
+          credentials: "include",
         },
-        body: JSON.stringify({ email, password })
-      });
+      );
+
+      const csrfToken = getCookie("XSRF-TOKEN");
+
+      const response = await fetch(
+        "http://https://formulaonestatwebapp-production.up.railway.app/api/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-XSRF-TOKEN": csrfToken || "",
+          },
+          body: JSON.stringify({ email, password }),
+        },
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -90,7 +101,9 @@ function LoginPage({ onLoginSuccess }: LoginPageProps) {
             className={errors.email ? "error" : ""}
             disabled={loading}
           />
-          {errors.email && <span className="error-message">{errors.email}</span>}
+          {errors.email && (
+            <span className="error-message">{errors.email}</span>
+          )}
         </div>
 
         <div className="form-group">
@@ -102,7 +115,9 @@ function LoginPage({ onLoginSuccess }: LoginPageProps) {
             className={errors.password ? "error" : ""}
             disabled={loading}
           />
-          {errors.password && <span className="error-message">{errors.password}</span>}
+          {errors.password && (
+            <span className="error-message">{errors.password}</span>
+          )}
         </div>
 
         <button type="submit" className="submit-button" disabled={loading}>
