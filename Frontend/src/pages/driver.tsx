@@ -43,7 +43,7 @@ function DriversPage({ isAdmin }: DriversPageProps) {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://formulaonestatwebapp-production.up.railway.applway.app/api/driver/",
+        "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
       );
       const data = await response.json();
       setDrivers(data);

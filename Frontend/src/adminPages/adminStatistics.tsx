@@ -45,8 +45,7 @@ const EMPTY_FORM: RaceResultForm = {
   GpOrSprint: "GP",
 };
 
-const API_BASE =
-  "https://formulaonestatwebapp-production.up.railway.applway.app/api";
+const API_BASE = "https://formulaonestatwebapp-production.up.railway.app/api";
 const SANCTUM_URL = "http://localhost:8000/sanctum/csrf-cookie";
 
 const NUMBER_FIELDS = [

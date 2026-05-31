@@ -61,7 +61,7 @@ function GrandPrixPage({ isAdmin }: GrandPrixPageProps) {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://https://formulaonestatwebapp-production.up.railway.applway.app/api/grand_prix",
+          "https://https://formulaonestatwebapp-production.up.railway.app/api/grand_prix",
         );
         const data = await response.json();
         setGrandPrix(data);
