@@ -27,13 +27,13 @@ function HomeSlider() {
         setLoading(true);
 
         const driversRes = await fetch(
-          "formulaonestatwebapp-production.up.railway.app/api/driver/",
+          "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
         );
         const driversData: Driver[] = await driversRes.json();
         setDrivers(driversData);
 
         const teamsRes = await fetch(
-          "formulaonestatwebapp-production.up.railway.app/api/constructor/",
+          "https://formulaonestatwebapp-production.up.railway.app/api/constructor/",
         );
         const teamsData: Team[] = await teamsRes.json();
         setTeams(teamsData);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/driver.css";
 import { imageMap } from "../utils/drivers-image-map";
-
+//asd
 interface Driver {
   DriverID: number;
   Name: string;
@@ -43,7 +43,7 @@ function DriversPage({ isAdmin }: DriversPageProps) {
     setLoading(true);
     try {
       const response = await fetch(
-        "formulaonestatwebapp-production.up.railway.app/api/driver/",
+        "https://formulaonestatwebapp-production.up.railway.applway.app/api/driver/",
       );
       const data = await response.json();
       setDrivers(data);

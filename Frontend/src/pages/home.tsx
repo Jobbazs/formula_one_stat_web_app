@@ -77,9 +77,11 @@ export default function HomePage() {
     async function fetchData() {
       try {
         const [driversRes, constructorsRes, newsRes] = await Promise.all([
-          fetch("formulaonestatwebapp-production.up.railway.app/api/driver/"),
+          fetch(https://formulaonestatwebapp-production.up.railway.app
+            "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
+          ),https://formulaonestatwebapp-production.up.railway.app
           fetch(
-            "formulaonestatwebapp-production.up.railway.app/api/constructor/",
+            "formhttps://formulaonestatwebapp-production.up.railway.app/constructor/",
           ),
           fetch("formulaonestatwebapp-production.up.railway.app/api/news"),
         ]);

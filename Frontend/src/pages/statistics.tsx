@@ -50,15 +50,15 @@ interface StatisticsPageProps {
 }
 
 const constructorColors: Record<number, string> = {
-  1:  "linear-gradient(135deg, #0d2747 0%, #c8102e 100%)",
-  2:  "linear-gradient(135deg, #460202 0%, #a6051a 100%)",
-  3:  "linear-gradient(135deg, #25412b 0%, #00e6cf 100%)",
-  4:  "linear-gradient(135deg, #1a1a1a 0%, #ff8000 100%)",
-  5:  "radial-gradient(circle at bottom right, #00665e 0%, #003a33 50%)",
-  6:  "linear-gradient(135deg, #fd0ae9 0%, #0066ff 80%)",
-  7:  "radial-gradient(circle at bottom right, #e8e8e8 0%, #003087 50%)",
-  8:  "linear-gradient(135deg, #1a1a2e 0%, #4778af 100%)",
-  9:  "linear-gradient(135deg, #00ff22 0%, #000000 100%)",
+  1: "linear-gradient(135deg, #0d2747 0%, #c8102e 100%)",
+  2: "linear-gradient(135deg, #460202 0%, #a6051a 100%)",
+  3: "linear-gradient(135deg, #25412b 0%, #00e6cf 100%)",
+  4: "linear-gradient(135deg, #1a1a1a 0%, #ff8000 100%)",
+  5: "radial-gradient(circle at bottom right, #00665e 0%, #003a33 50%)",
+  6: "linear-gradient(135deg, #fd0ae9 0%, #0066ff 80%)",
+  7: "radial-gradient(circle at bottom right, #e8e8e8 0%, #003087 50%)",
+  8: "linear-gradient(135deg, #1a1a2e 0%, #4778af 100%)",
+  9: "linear-gradient(135deg, #00ff22 0%, #000000 100%)",
   10: "linear-gradient(135deg, #1a1a1a 0%, #b6babd 100%)",
 };
 
@@ -68,30 +68,53 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [constructors, setConstructors] = useState<Constructor[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<number | null>(null);
-  const [selectedConstructor, setSelectedConstructor] = useState<number | null>(null);
+  const [selectedConstructor, setSelectedConstructor] = useState<number | null>(
+    null,
+  );
   const [driverStats, setDriverStats] = useState<DriverStats | null>(null);
-  const [constructorStats, setConstructorStats] = useState<ConstructorStats | null>(null);
+  const [constructorStats, setConstructorStats] =
+    useState<ConstructorStats | null>(null);
   const [standings, setStandings] = useState<Standing[]>([]);
-  const [statsLoading, setStatsLoading] = useState(false);
+  const [sthttps://formulaonestatwebapp-production.up.railway.app;
 
   useEffect(() => {
-    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/driver/")
-      .then(r => r.json()).then(setDrivers).catch(console.error);
+    fetch(https://formulaonestatwebapp-production.up.railway.app
+      "https://formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/driver/",
+    )
+      .then((r) => r.json())
+      .then(setDrivers)
+      .catch(console.error);
 
-    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/constructor/")
-      .then(r => r.json()).then(setConstructors).catch(console.error);
+    fetch(
+      "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/constructor/",
+    )
+      .then((r) => r.json())
+      .then(setConstructors)
+      .catch(console.error);
 
-    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers")
-      .then(r => r.json()).then(setStandings).catch(console.error);
+    fetch(
+      "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers",
+    )
+      .then((r) => r.json())
+      .then(setStandings)
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
     if (tab === "drivers") {
-      fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers")
-        .then(r => r.json()).then(setStandings).catch(console.error);
+      fetch(
+        "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers",
+      )
+        .then((r) => r.json())
+        .then(setStandings)
+        .catch(console.error);
     } else {
-      fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/constructors")
-        .then(r => r.json()).then(setStandings).catch(console.error);
+      fetch(
+        "formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/constructors",
+      )
+        .then((r) => r.json())
+        .then(setStandings)
+        .catch(console.error);
     }
     setSelectedDriver(null);
     setSelectedConstructor(null);
@@ -102,32 +125,45 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const handleDriverSelect = (id: number) => {
     setSelectedDriver(id);
     setStatsLoading(true);
-    fetch(`formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/driver/${id}`)
-      .then(r => r.json())
-      .then(data => { setDriverStats(data); setStatsLoading(false); })
+    fetch(
+      `formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/driver/${id}`,
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        setDriverStats(data);
+        setStatsLoading(false);
+      })
       .catch(console.error);
   };
 
   const handleConstructorSelect = (id: number) => {
     setSelectedConstructor(id);
     setStatsLoading(true);
-    fetch(`formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/constructor/${id}`)
-      .then(r => r.json())
-      .then(data => { setConstructorStats(data); setStatsLoading(false); })
+    fetch(
+      `formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/constructor/${id}`,
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        setConstructorStats(data);
+        setStatsLoading(false);
+      })
       .catch(console.error);
   };
 
   const maxPoints = driverStats
-    ? Math.max(...driverStats.points_chart.map(r => r.points), 1)
+    ? Math.max(...driverStats.points_chart.map((r) => r.points), 1)
     : constructorStats
-    ? Math.max(...constructorStats.points_chart.map(r => r.points), 1)
-    : 1;
+      ? Math.max(...constructorStats.points_chart.map((r) => r.points), 1)
+      : 1;
 
-  const chart = driverStats?.points_chart ?? constructorStats?.points_chart ?? [];
+  const chart =
+    driverStats?.points_chart ?? constructorStats?.points_chart ?? [];
   const stats = driverStats ?? constructorStats;
 
-  const selectedDriverObj = drivers.find(d => d.DriverID === selectedDriver);
-  const selectedConstructorObj = constructors.find(c => c.ConstructorID === selectedConstructor);
+  const selectedDriverObj = drivers.find((d) => d.DriverID === selectedDriver);
+  const selectedConstructorObj = constructors.find(
+    (c) => c.ConstructorID === selectedConstructor,
+  );
 
   return (
     <div className="stats-page">
@@ -145,11 +181,15 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
           <div
             className={`stats-tab ${tab === "drivers" ? "active" : ""}`}
             onClick={() => setTab("drivers")}
-          >Drivers</div>
+          >
+            Drivers
+          </div>
           <div
             className={`stats-tab ${tab === "constructors" ? "active" : ""}`}
             onClick={() => setTab("constructors")}
-          >Constructors</div>
+          >
+            Constructors
+          </div>
         </div>
       </div>
 
@@ -161,14 +201,16 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
 
           {tab === "drivers" ? (
             <div className="stats-list">
-              {drivers.map(d => (
+              {drivers.map((d) => (
                 <div
                   key={d.DriverID}
                   className={`stats-list-item ${selectedDriver === d.DriverID ? "active" : ""}`}
-                  style={{ borderLeft: `4px solid transparent`,
-                    background: selectedDriver === d.DriverID
-                      ? constructorColors[d.ConstructorID]
-                      : "#2a2a2a"
+                  style={{
+                    borderLeft: `4px solid transparent`,
+                    background:
+                      selectedDriver === d.DriverID
+                        ? constructorColors[d.ConstructorID]
+                        : "#2a2a2a",
                   }}
                   onClick={() => handleDriverSelect(d.DriverID)}
                 >
@@ -179,14 +221,15 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
             </div>
           ) : (
             <div className="stats-list">
-              {constructors.map(c => (
+              {constructors.map((c) => (
                 <div
                   key={c.ConstructorID}
                   className={`stats-list-item ${selectedConstructor === c.ConstructorID ? "active" : ""}`}
                   style={{
-                    background: selectedConstructor === c.ConstructorID
-                      ? constructorColors[c.ConstructorID]
-                      : "#2a2a2a"
+                    background:
+                      selectedConstructor === c.ConstructorID
+                        ? constructorColors[c.ConstructorID]
+                        : "#2a2a2a",
                   }}
                   onClick={() => handleConstructorSelect(c.ConstructorID)}
                 >
@@ -202,22 +245,29 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
           {!stats && !statsLoading && (
             <div className="stats-standings">
               <div className="stats-standings-title">
-                {tab === "drivers" ? "Driver Standings 2024" : "Constructor Standings 2024"}
+                {tab === "drivers"
+                  ? "Driver Standings 2024"
+                  : "Constructor Standings 2024"}
               </div>
               {standings.map((s, i) => (
                 <div
                   key={i}
                   className="stats-standing-row"
-                  onClick={() => tab === "drivers"
-                    ? handleDriverSelect(s.DriverID!)
-                    : handleConstructorSelect(s.ConstructorID!)
+                  onClick={() =>
+                    tab === "drivers"
+                      ? handleDriverSelect(s.DriverID!)
+                      : handleConstructorSelect(s.ConstructorID!)
                   }
                   style={{
-                    background: tab === "constructors" && s.ConstructorID
-                      ? constructorColors[s.ConstructorID]
-                      : tab === "drivers" && s.DriverID
-                      ? constructorColors[drivers.find(d => d.DriverID === s.DriverID)?.ConstructorID ?? 0]
-                      : "#2a2a2a"
+                    background:
+                      tab === "constructors" && s.ConstructorID
+                        ? constructorColors[s.ConstructorID]
+                        : tab === "drivers" && s.DriverID
+                          ? constructorColors[
+                              drivers.find((d) => d.DriverID === s.DriverID)
+                                ?.ConstructorID ?? 0
+                            ]
+                          : "#2a2a2a",
                   }}
                 >
                   <span className="standing-pos">{i + 1}</span>
@@ -239,7 +289,8 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
               <div className="stats-entity-title">
                 {selectedDriverObj?.Name ?? selectedConstructorObj?.Name}
                 <span className="stats-entity-sub">
-                  {selectedDriverObj?.Nationality ?? selectedConstructorObj?.Nationality}
+                  {selectedDriverObj?.Nationality ??
+                    selectedConstructorObj?.Nationality}
                 </span>
               </div>
 
@@ -266,7 +317,9 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
                 </div>
                 <div className="stats-card">
                   <div className="stats-card-label">Pts / Race</div>
-                  <div className="stats-card-value">{stats.points_per_race}</div>
+                  <div className="stats-card-value">
+                    {stats.points_per_race}
+                  </div>
                 </div>
               </div>
 
@@ -274,12 +327,18 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
               <div className="stats-chart">
                 {chart.map((r, i) => (
                   <div key={i} className="stats-bar-wrap">
-                    <div className="stats-bar-value">{r.points > 0 ? r.points : ""}</div>
+                    <div className="stats-bar-value">
+                      {r.points > 0 ? r.points : ""}
+                    </div>
                     <div
                       className="stats-bar"
-                      style={{ height: `${Math.max((r.points / maxPoints) * 100, 2)}%` }}
+                      style={{
+                        height: `${Math.max((r.points / maxPoints) * 100, 2)}%`,
+                      }}
                     />
-                    <div className="stats-bar-label">{r.Country.slice(0, 3).toUpperCase()}</div>
+                    <div className="stats-bar-label">
+                      {r.Country.slice(0, 3).toUpperCase()}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -287,16 +346,23 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
               {constructorStats && (
                 <div className="stats-drivers-title">Drivers</div>
               )}
-              {constructorStats?.drivers.map(d => (
-                <div key={d.DriverID} className="stats-driver-chip">{d.Name}</div>
+              {constructorStats?.drivers.map((d) => (
+                <div key={d.DriverID} className="stats-driver-chip">
+                  {d.Name}
+                </div>
               ))}
 
-              <button className="stats-back-btn" onClick={() => {
-                setDriverStats(null);
-                setConstructorStats(null);
-                setSelectedDriver(null);
-                setSelectedConstructor(null);
-              }}>← Back to standings</button>
+              <button
+                className="stats-back-btn"
+                onClick={() => {
+                  setDriverStats(null);
+                  setConstructorStats(null);
+                  setSelectedDriver(null);
+                  setSelectedConstructor(null);
+                }}
+              >
+                ← Back to standings
+              </button>
             </>
           )}
         </div>

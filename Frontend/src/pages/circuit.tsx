@@ -35,7 +35,7 @@ function CircuitPage({ isAdmin }: CircuitPageProps) {
     setError(null);
     try {
       const response = await fetch(
-        "formulaonestatwebapp-production.up.railway.app/api/circuit/",
+        "https://formulaonestatwebapp-production.up.railway.app/api/circuit/",
       );
 
       if (!response.ok) {

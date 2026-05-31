@@ -47,7 +47,7 @@ function ConstructorPage({ isAdmin }: ConstructorPageProps) {
       setLoading(true);
       try {
         const response = await fetch(
-          "formulaonestatwebapp-production.up.railway.app/api/constructor/",
+          "https://formulaonestatwebapp-production.up.railway.applway.app/api/constructor/",
         );
         const data = await response.json();
         setConstructors(
