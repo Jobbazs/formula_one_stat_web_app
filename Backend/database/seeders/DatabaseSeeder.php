@@ -13,23 +13,22 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-       public function run(): void
+    public function run(): void
     {
         $this->call([
-            CircuitsSeeder::class,        
-            ConstructorSeeder::class,    
-            DriverSeeder::class,         
-            GrandPrixSeeder::class,      
-            RaceResultSeeder::class,  
+            CircuitsSeeder::class,
+            ConstructorSeeder::class,
+            DriverSeeder::class,
+            GrandPrixSeeder::class,
+            RaceresultSeeder::class,
             QualifyingResultSeeder::class
-            
+
         ]);
 
         User::create([
-    'name' => 'Admin',                
-    'email' => 'admin@admin.hu',      
-    'password' => \Illuminate\Support\Facades\Hash::make('Aa123456'), 
-]);
-
+            'name' => 'Admin',
+            'email' => 'admin@admin.hu',
+            'password' => \Illuminate\Support\Facades\Hash::make('Aa123456'),
+        ]);
     }
 }
