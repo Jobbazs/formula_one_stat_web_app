@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('PolePositions')->default(0); 
             $table->unsignedInteger('Podiums')->default(0); 
             $table->unsignedTinyInteger('WorldChampionships')->default(0); 
-            $table->text('History')->default('');
+            $table->text('History')->nullable()->default(null);
             $table->string('Image', 255)->default('');
             $table->timestamps();
         });

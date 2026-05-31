@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ConstructorID')->nullable();
             $table->string('Nationality', 50);
             $table->date('BirthDate');
-            $table->text('Biography')->default('');
+            $table->text('Biography')->nullable()->default(null);
             $table->string('Image', 255)->default('');
             $table->timestamps();
 
