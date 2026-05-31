@@ -50,7 +50,7 @@ const countryColors: Record<string, string> = {
     "linear-gradient(to right, #00732f 33%, #ffffff 33%, #ffffff 66%, #000000 66%)",
 };
 
-function GrandPrixPage({ isAdmin }: Grformulaonestatwebapp-production.up.railway.app
+function GrandPrixPage({ isAdmin }: GrandPrixPageProps) {
   const [grand_prix, setGrandPrix] = useState<GrandPrix[]>([]);
   const [loading, setLoading] = useState(false);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -61,7 +61,7 @@ function GrandPrixPage({ isAdmin }: Grformulaonestatwebapp-production.up.railway
       setLoading(true);
       try {
         const response = await fetch(
-          "formulaonestatwebapp-production.up.railway.app/api/grand_prix",
+          "https://formulaonestatwebapp-production.up.railway.app/api/grand_prix",
         );
         const data = await response.json();
         setGrandPrix(data);
