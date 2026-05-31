@@ -30,7 +30,7 @@ const EMPTY_FORM: GrandPrixForm = {
   Image: "",
 };
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "formulaonestatwebapp-production.up.railway.app/api";
 const SANCTUM_URL = "http://localhost:8000/sanctum/csrf-cookie";
 
 function AdminGrandPrixPage() {
@@ -46,7 +46,6 @@ function AdminGrandPrixPage() {
     fetchGrandPrix();
   }, []);
 
-
   const getCookie = (name: string): string | null => {
     const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
     return match ? decodeURIComponent(match[2]) : null;
@@ -59,10 +58,9 @@ function AdminGrandPrixPage() {
 
   const authHeaders = (csrfToken: string): HeadersInit => ({
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    Accept: "application/json",
     "X-XSRF-TOKEN": csrfToken,
   });
-
 
   const fetchGrandPrix = async () => {
     setLoading(true);
@@ -76,7 +74,6 @@ function AdminGrandPrixPage() {
     }
   };
 
-
   const handleAdd = async () => {
     try {
       const csrfToken = await getCsrfToken();
@@ -88,7 +85,9 @@ function AdminGrandPrixPage() {
           ...form,
           CircuitID: parseInt(form.CircuitID),
           Year: parseInt(form.Year),
-          WinnerDriverID: form.WinnerDriverID ? parseInt(form.WinnerDriverID) : null,
+          WinnerDriverID: form.WinnerDriverID
+            ? parseInt(form.WinnerDriverID)
+            : null,
           Image: form.Image || "",
         }),
       });
@@ -139,24 +138,43 @@ function AdminGrandPrixPage() {
     }
   };
 
-
   const renderAddForm = () => (
     <div className="admin-form-box">
       <h2>Új Grand Prix</h2>
       <div className="admin-form">
-        {(["Name", "Country", "CircuitID", "Year", "WinnerDriverID", "Image"] as (keyof GrandPrixForm)[]).map((field) => (
+        {(
+          [
+            "Name",
+            "Country",
+            "CircuitID",
+            "Year",
+            "WinnerDriverID",
+            "Image",
+          ] as (keyof GrandPrixForm)[]
+        ).map((field) => (
           <div className="admin-form-group" key={field}>
             <label>{field}</label>
             <input
-              type={["CircuitID", "Year", "WinnerDriverID"].includes(field) ? "number" : "text"}
+              type={
+                ["CircuitID", "Year", "WinnerDriverID"].includes(field)
+                  ? "number"
+                  : "text"
+              }
               value={form[field]}
               onChange={(e) => setForm({ ...form, [field]: e.target.value })}
             />
           </div>
         ))}
         <div className="admin-form-buttons">
-          <button className="admin-form-save" onClick={handleAdd}>Mentés</button>
-          <button className="admin-form-cancel" onClick={() => setShowAddForm(false)}>Mégse</button>
+          <button className="admin-form-save" onClick={handleAdd}>
+            Mentés
+          </button>
+          <button
+            className="admin-form-cancel"
+            onClick={() => setShowAddForm(false)}
+          >
+            Mégse
+          </button>
         </div>
       </div>
     </div>
@@ -185,21 +203,33 @@ function AdminGrandPrixPage() {
             <td>{gp.Year}</td>
             <td>{gp.WinnerDriverID || "-"}</td>
             <td className="admin-driver-actions">
-              <button className="admin-edit-btn" onClick={() => setEditGP({ ...gp })}>
-                 Szerkesztés
+              <button
+                className="admin-edit-btn"
+                onClick={() => setEditGP({ ...gp })}
+              >
+                Szerkesztés
               </button>
               {deleteConfirmId === gp.GrandPrixID ? (
                 <>
-                  <button className="admin-form-save" onClick={() => handleDelete(gp.GrandPrixID)}>
+                  <button
+                    className="admin-form-save"
+                    onClick={() => handleDelete(gp.GrandPrixID)}
+                  >
                     Biztos?
                   </button>
-                  <button className="admin-form-cancel" onClick={() => setDeleteConfirmId(null)}>
+                  <button
+                    className="admin-form-cancel"
+                    onClick={() => setDeleteConfirmId(null)}
+                  >
                     Mégse
                   </button>
                 </>
               ) : (
-                <button className="admin-delete-btn" onClick={() => setDeleteConfirmId(gp.GrandPrixID)}>
-                   Törlés
+                <button
+                  className="admin-delete-btn"
+                  onClick={() => setDeleteConfirmId(gp.GrandPrixID)}
+                >
+                  Törlés
                 </button>
               )}
             </td>
@@ -213,13 +243,30 @@ function AdminGrandPrixPage() {
     <div className="modal-overlay" onClick={() => setEditGP(null)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Szerkesztés</h2>
-        {(["Name", "Country", "CircuitID", "Year", "WinnerDriverID", "Image"] as (keyof GrandPrix)[]).map((field) => (
+        {(
+          [
+            "Name",
+            "Country",
+            "CircuitID",
+            "Year",
+            "WinnerDriverID",
+            "Image",
+          ] as (keyof GrandPrix)[]
+        ).map((field) => (
           <div className="admin-form-group" key={field}>
             <label>{field}</label>
             <input
-              type={["CircuitID", "Year", "WinnerDriverID"].includes(field as string) ? "number" : "text"}
-              value={editGP![field] as string || ""}
-              onChange={(e) => setEditGP({ ...editGP!, [field]: e.target.value })}
+              type={
+                ["CircuitID", "Year", "WinnerDriverID"].includes(
+                  field as string,
+                )
+                  ? "number"
+                  : "text"
+              }
+              value={(editGP![field] as string) || ""}
+              onChange={(e) =>
+                setEditGP({ ...editGP!, [field]: e.target.value })
+              }
             />
           </div>
         ))}
@@ -231,18 +278,22 @@ function AdminGrandPrixPage() {
     </div>
   );
 
-
   return (
     <div className="admin-form-page">
       <div className="admin-driver-container">
-
         <div className="admin-driver-header">
           <h1>Grand Prix Management</h1>
           <div style={{ display: "flex", gap: "1rem" }}>
-            <button className="admin-add-btn" onClick={() => setShowAddForm(!showAddForm)}>
+            <button
+              className="admin-add-btn"
+              onClick={() => setShowAddForm(!showAddForm)}
+            >
               {showAddForm ? "✕ Bezár" : "+ Add Grand Prix"}
             </button>
-            <button className="admin-form-cancel" onClick={() => navigate("/grand_prix")}>
+            <button
+              className="admin-form-cancel"
+              onClick={() => navigate("/grand_prix")}
+            >
               ← Vissza
             </button>
           </div>
@@ -251,7 +302,6 @@ function AdminGrandPrixPage() {
         {showAddForm && renderAddForm()}
         {loading ? <div className="loading">Betöltés...</div> : renderTable()}
         {editGP && renderEditModal()}
-
       </div>
     </div>
   );

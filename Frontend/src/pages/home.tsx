@@ -43,9 +43,7 @@ const f1History: Record<string, { year: number; text: string }[]> = {
     { year: 1976, text: "Niki Lauda wins the Spanish Grand Prix at Jarama." },
     { year: 1999, text: "Michael Schumacher takes pole at Imola." },
   ],
-  "04-12": [
-    { year: 1981, text: "Gilles Villeneuve wins at San Marino GP." },
-  ],
+  "04-12": [{ year: 1981, text: "Gilles Villeneuve wins at San Marino GP." }],
 };
 
 function getTodayKey(): string {
@@ -79,9 +77,11 @@ export default function HomePage() {
     async function fetchData() {
       try {
         const [driversRes, constructorsRes, newsRes] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/driver/"),
-          fetch("http://127.0.0.1:8000/api/constructor/"),
-          fetch("http://127.0.0.1:8000/api/news"),
+          fetch("formulaonestatwebapp-production.up.railway.app/api/driver/"),
+          fetch(
+            "formulaonestatwebapp-production.up.railway.app/api/constructor/",
+          ),
+          fetch("formulaonestatwebapp-production.up.railway.app/api/news"),
         ]);
 
         setDrivers(await driversRes.json());
@@ -115,7 +115,6 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
-
       <div className="home-main-grid">
         <div className="home-news-card">
           {news.length > 0 ? (
@@ -132,8 +131,9 @@ export default function HomePage() {
               <span className="home-news-badge">Latest News</span>
               <div className="home-news-title">{news[activeNews].title}</div>
               <div className="home-news-meta">{news[activeNews].date}</div>
-              
-                <a className="home-news-link"
+
+              <a
+                className="home-news-link"
                 href={news[activeNews].link}
                 target="_blank"
                 rel="noreferrer"
@@ -200,7 +200,6 @@ export default function HomePage() {
               ))}
         </div>
       </div>
-
     </div>
   );
 }

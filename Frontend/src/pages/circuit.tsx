@@ -34,12 +34,14 @@ function CircuitPage({ isAdmin }: CircuitPageProps) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/circuit/");
-      
+      const response = await fetch(
+        "formulaonestatwebapp-production.up.railway.app/api/circuit/",
+      );
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       setCircuits(data);
     } catch (err) {
@@ -79,68 +81,70 @@ function CircuitPage({ isAdmin }: CircuitPageProps) {
       <div className="circuit-header">
         <h1>CIRCUITS</h1>
         {isAdmin && (
-          <button className="admin-add-btn" onClick={() => navigate("/admin/circuits")}>
+          <button
+            className="admin-add-btn"
+            onClick={() => navigate("/admin/circuits")}
+          >
             + Manage Circuits
           </button>
         )}
       </div>
 
       <div className="circuits-grid">
-       {circuits.map((circuit) => {
-  const circuitImage = getCircuitImage(circuit.Country);
+        {circuits.map((circuit) => {
+          const circuitImage = getCircuitImage(circuit.Country);
 
-  return (
-    <div
-      key={circuit.CircuitID}
-      onClick={() => handleCircuitClick(circuit.CircuitID)}
-      className="circuit-card"
-    >
-      <div className="circuit-top">
-        <div>
-          <h3 className="circuit-name">{circuit.Name}</h3>
-          <p className="circuit-location">
-            {circuit.Location}, {circuit.Country}
-          </p>
-        </div>
-      </div>
-<div className="circuit-stats-grid">
-  <div className="stat-box">
-    <span>Length </span>
-    <strong>{circuit.Length} km</strong>
-  </div>
-
-  <div className="stat-box">
-    <span>Laps </span>
-    <strong>{circuit.Laps}</strong>
-  </div>
-
-  <div className="stat-box">
-    <span>First GP </span>
-    <strong>{circuit.FirstGrandPrix}</strong>
-  </div>
-
-  <div className="stat-box">
-    <span>Record </span>
-    <strong>
-      {circuit.RecordDriver
-        ? `${circuit.RecordDriver} – ${circuit.RecordLapTime}`
-        : "-"}
-    </strong>
-  </div>
-</div>
-
-      {circuitImage && (
-        <div className="circuit-image-wrap">
-          <img src={circuitImage} alt={circuit.Name} />
-        </div>
-      )}
-    </div>
-  );
-})}
+          return (
+            <div
+              key={circuit.CircuitID}
+              onClick={() => handleCircuitClick(circuit.CircuitID)}
+              className="circuit-card"
+            >
+              <div className="circuit-top">
+                <div>
+                  <h3 className="circuit-name">{circuit.Name}</h3>
+                  <p className="circuit-location">
+                    {circuit.Location}, {circuit.Country}
+                  </p>
                 </div>
-              
+              </div>
+              <div className="circuit-stats-grid">
+                <div className="stat-box">
+                  <span>Length </span>
+                  <strong>{circuit.Length} km</strong>
+                </div>
+
+                <div className="stat-box">
+                  <span>Laps </span>
+                  <strong>{circuit.Laps}</strong>
+                </div>
+
+                <div className="stat-box">
+                  <span>First GP </span>
+                  <strong>{circuit.FirstGrandPrix}</strong>
+                </div>
+
+                <div className="stat-box">
+                  <span>Record </span>
+                  <strong>
+                    {circuit.RecordDriver
+                      ? `${circuit.RecordDriver} – ${circuit.RecordLapTime}`
+                      : "-"}
+                  </strong>
+                </div>
+              </div>
+
+              {circuitImage && (
+                <div className="circuit-image-wrap">
+                  <img src={circuitImage} alt={circuit.Name} />
+                </div>
+              )}
             </div>
           );
-        }
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default CircuitPage;

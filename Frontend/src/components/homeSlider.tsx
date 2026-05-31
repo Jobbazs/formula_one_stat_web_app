@@ -26,14 +26,17 @@ function HomeSlider() {
       try {
         setLoading(true);
 
-        const driversRes = await fetch("http://127.0.0.1:8000/api/driver/");
+        const driversRes = await fetch(
+          "formulaonestatwebapp-production.up.railway.app/api/driver/",
+        );
         const driversData: Driver[] = await driversRes.json();
         setDrivers(driversData);
 
-        const teamsRes = await fetch("http://127.0.0.1:8000/api/constructor/");
+        const teamsRes = await fetch(
+          "formulaonestatwebapp-production.up.railway.app/api/constructor/",
+        );
         const teamsData: Team[] = await teamsRes.json();
         setTeams(teamsData);
-
       } catch (err) {
         console.error("Hiba a fetch-nél:", err);
       } finally {

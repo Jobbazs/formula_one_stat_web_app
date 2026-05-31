@@ -24,11 +24,16 @@ type CircuitForm = {
 };
 
 const EMPTY_FORM: CircuitForm = {
-  Name: "", Location: "", Nation: "",
-  FirstGrandPrix: "", RecordLapTime: "", RecordDriver: "", Image: "",
+  Name: "",
+  Location: "",
+  Nation: "",
+  FirstGrandPrix: "",
+  RecordLapTime: "",
+  RecordDriver: "",
+  Image: "",
 };
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "formulaonestatwebapp-production.up.railway.app/api";
 const SANCTUM_URL = "http://localhost:8000/sanctum/csrf-cookie";
 
 const NUMBER_FIELDS = ["FirstGrandPrix"];
@@ -42,7 +47,9 @@ function AdminCircuitPage() {
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const [form, setForm] = useState<CircuitForm>(EMPTY_FORM);
 
-  useEffect(() => { fetchCircuits(); }, []);
+  useEffect(() => {
+    fetchCircuits();
+  }, []);
 
   // ─── API helpers ──────────────────────────────────────────────────────────
 
@@ -58,7 +65,7 @@ function AdminCircuitPage() {
 
   const authHeaders = (csrfToken: string): HeadersInit => ({
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    Accept: "application/json",
     "X-XSRF-TOKEN": csrfToken,
   });
 
@@ -87,7 +94,9 @@ function AdminCircuitPage() {
         headers: authHeaders(csrfToken),
         body: JSON.stringify({
           ...form,
-          FirstGrandPrix: form.FirstGrandPrix ? parseInt(form.FirstGrandPrix) : null,
+          FirstGrandPrix: form.FirstGrandPrix
+            ? parseInt(form.FirstGrandPrix)
+            : null,
           RecordLapTime: form.RecordLapTime || "",
           RecordDriver: form.RecordDriver || "",
           Image: form.Image || "",
@@ -159,8 +168,15 @@ function AdminCircuitPage() {
           </div>
         ))}
         <div className="admin-form-buttons">
-          <button className="admin-form-save" onClick={handleAdd}>Mentés</button>
-          <button className="admin-form-cancel" onClick={() => setShowAddForm(false)}>Mégse</button>
+          <button className="admin-form-save" onClick={handleAdd}>
+            Mentés
+          </button>
+          <button
+            className="admin-form-cancel"
+            onClick={() => setShowAddForm(false)}
+          >
+            Mégse
+          </button>
         </div>
       </div>
     </div>
@@ -189,16 +205,32 @@ function AdminCircuitPage() {
             <td>{c.FirstGrandPrix || "-"}</td>
             <td>{c.RecordDriver || "-"}</td>
             <td className="admin-driver-actions">
-              <button className="admin-edit-btn" onClick={() => setEditC({ ...c })}>
+              <button
+                className="admin-edit-btn"
+                onClick={() => setEditC({ ...c })}
+              >
                 ✏️ Szerkesztés
               </button>
               {deleteConfirmId === c.CircuitID ? (
                 <>
-                  <button className="admin-form-save" onClick={() => handleDelete(c.CircuitID)}>Biztos?</button>
-                  <button className="admin-form-cancel" onClick={() => setDeleteConfirmId(null)}>Mégse</button>
+                  <button
+                    className="admin-form-save"
+                    onClick={() => handleDelete(c.CircuitID)}
+                  >
+                    Biztos?
+                  </button>
+                  <button
+                    className="admin-form-cancel"
+                    onClick={() => setDeleteConfirmId(null)}
+                  >
+                    Mégse
+                  </button>
                 </>
               ) : (
-                <button className="admin-delete-btn" onClick={() => setDeleteConfirmId(c.CircuitID)}>
+                <button
+                  className="admin-delete-btn"
+                  onClick={() => setDeleteConfirmId(c.CircuitID)}
+                >
                   🗑 Törlés
                 </button>
               )}
@@ -213,12 +245,22 @@ function AdminCircuitPage() {
     <div className="modal-overlay" onClick={() => setEditC(null)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Szerkesztés</h2>
-        {(["Name", "Location", "Nation", "FirstGrandPrix", "RecordLapTime", "RecordDriver", "Image"] as (keyof Circuit)[]).map((field) => (
+        {(
+          [
+            "Name",
+            "Location",
+            "Nation",
+            "FirstGrandPrix",
+            "RecordLapTime",
+            "RecordDriver",
+            "Image",
+          ] as (keyof Circuit)[]
+        ).map((field) => (
           <div className="admin-form-group" key={field}>
             <label>{field}</label>
             <input
               type={NUMBER_FIELDS.includes(field as string) ? "number" : "text"}
-              value={editC![field] as string | number || ""}
+              value={(editC![field] as string | number) || ""}
               onChange={(e) => setEditC({ ...editC!, [field]: e.target.value })}
             />
           </div>
@@ -236,14 +278,19 @@ function AdminCircuitPage() {
   return (
     <div className="admin-form-page">
       <div className="admin-driver-container">
-
         <div className="admin-driver-header">
           <h1>Circuit Management</h1>
           <div style={{ display: "flex", gap: "1rem" }}>
-            <button className="admin-add-btn" onClick={() => setShowAddForm(!showAddForm)}>
+            <button
+              className="admin-add-btn"
+              onClick={() => setShowAddForm(!showAddForm)}
+            >
               {showAddForm ? "✕ Bezár" : "+ Add Circuit"}
             </button>
-            <button className="admin-form-cancel" onClick={() => navigate("/circuit")}>
+            <button
+              className="admin-form-cancel"
+              onClick={() => navigate("/circuit")}
+            >
               ← Vissza
             </button>
           </div>
@@ -252,7 +299,6 @@ function AdminCircuitPage() {
         {showAddForm && renderAddForm()}
         {loading ? <div className="loading">Betöltés...</div> : renderTable()}
         {editC && renderEditModal()}
-
       </div>
     </div>
   );

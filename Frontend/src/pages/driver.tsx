@@ -42,7 +42,9 @@ function DriversPage({ isAdmin }: DriversPageProps) {
   const fetchDrivers = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/driver/");
+      const response = await fetch(
+        "formulaonestatwebapp-production.up.railway.app/api/driver/",
+      );
       const data = await response.json();
       setDrivers(data);
     } catch (err) {

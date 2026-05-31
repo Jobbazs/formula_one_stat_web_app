@@ -75,22 +75,22 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const [statsLoading, setStatsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/driver/")
+    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/driver/")
       .then(r => r.json()).then(setDrivers).catch(console.error);
 
-    fetch("http://127.0.0.1:8000/api/constructor/")
+    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/constructor/")
       .then(r => r.json()).then(setConstructors).catch(console.error);
 
-    fetch("http://127.0.0.1:8000/api/statistics/standings/drivers")
+    fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers")
       .then(r => r.json()).then(setStandings).catch(console.error);
   }, []);
 
   useEffect(() => {
     if (tab === "drivers") {
-      fetch("http://127.0.0.1:8000/api/statistics/standings/drivers")
+      fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/drivers")
         .then(r => r.json()).then(setStandings).catch(console.error);
     } else {
-      fetch("http://127.0.0.1:8000/api/statistics/standings/constructors")
+      fetch("formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/standings/constructors")
         .then(r => r.json()).then(setStandings).catch(console.error);
     }
     setSelectedDriver(null);
@@ -102,7 +102,7 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const handleDriverSelect = (id: number) => {
     setSelectedDriver(id);
     setStatsLoading(true);
-    fetch(`http://127.0.0.1:8000/api/statistics/driver/${id}`)
+    fetch(`formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/driver/${id}`)
       .then(r => r.json())
       .then(data => { setDriverStats(data); setStatsLoading(false); })
       .catch(console.error);
@@ -111,7 +111,7 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const handleConstructorSelect = (id: number) => {
     setSelectedConstructor(id);
     setStatsLoading(true);
-    fetch(`http://127.0.0.1:8000/api/statistics/constructor/${id}`)
+    fetch(`formulaonestatwebapp-production.up.railway.appproduction.up.railway.app/api/statistics/constructor/${id}`)
       .then(r => r.json())
       .then(data => { setConstructorStats(data); setStatsLoading(false); })
       .catch(console.error);

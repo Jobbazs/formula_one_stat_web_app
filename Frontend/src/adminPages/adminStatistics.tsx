@@ -33,15 +33,30 @@ type RaceResultForm = {
 };
 
 const EMPTY_FORM: RaceResultForm = {
-  GrandPrixID: "", DriverID: "", ConstructorID: "",
-  Position: "", Grid: "", Laps: "", TimeOrRetired: "",
-  Points: "0", FastestLap: false, GpOrSprint: "GP",
+  GrandPrixID: "",
+  DriverID: "",
+  ConstructorID: "",
+  Position: "",
+  Grid: "",
+  Laps: "",
+  TimeOrRetired: "",
+  Points: "0",
+  FastestLap: false,
+  GpOrSprint: "GP",
 };
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "formulaonestatwebapp-production.up.railway.app/api";
 const SANCTUM_URL = "http://localhost:8000/sanctum/csrf-cookie";
 
-const NUMBER_FIELDS = ["GrandPrixID", "DriverID", "ConstructorID", "Position", "Grid", "Laps", "Points"];
+const NUMBER_FIELDS = [
+  "GrandPrixID",
+  "DriverID",
+  "ConstructorID",
+  "Position",
+  "Grid",
+  "Laps",
+  "Points",
+];
 
 function AdminStatisticsPage() {
   const navigate = useNavigate();
@@ -52,7 +67,9 @@ function AdminStatisticsPage() {
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
   const [form, setForm] = useState<RaceResultForm>(EMPTY_FORM);
 
-  useEffect(() => { fetchResults(); }, []);
+  useEffect(() => {
+    fetchResults();
+  }, []);
 
   // ─── API helpers ──────────────────────────────────────────────────────────
 
@@ -68,7 +85,7 @@ function AdminStatisticsPage() {
 
   const authHeaders = (csrfToken: string): HeadersInit => ({
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    Accept: "application/json",
     "X-XSRF-TOKEN": csrfToken,
   });
 
@@ -169,7 +186,19 @@ function AdminStatisticsPage() {
     <div className="admin-form-box">
       <h2>Új Race Result</h2>
       <div className="admin-form">
-        {(["GrandPrixID", "DriverID", "ConstructorID", "Position", "Grid", "Laps", "TimeOrRetired", "Points", "GpOrSprint"] as (keyof RaceResultForm)[]).map((field) => (
+        {(
+          [
+            "GrandPrixID",
+            "DriverID",
+            "ConstructorID",
+            "Position",
+            "Grid",
+            "Laps",
+            "TimeOrRetired",
+            "Points",
+            "GpOrSprint",
+          ] as (keyof RaceResultForm)[]
+        ).map((field) => (
           <div className="admin-form-group" key={field}>
             <label>{field}</label>
             <input
@@ -184,14 +213,23 @@ function AdminStatisticsPage() {
             <input
               type="checkbox"
               checked={form.FastestLap}
-              onChange={(e) => setForm({ ...form, FastestLap: e.target.checked })}
-            />
-            {" "}Fastest Lap
+              onChange={(e) =>
+                setForm({ ...form, FastestLap: e.target.checked })
+              }
+            />{" "}
+            Fastest Lap
           </label>
         </div>
         <div className="admin-form-buttons">
-          <button className="admin-form-save" onClick={handleAdd}>Mentés</button>
-          <button className="admin-form-cancel" onClick={() => setShowAddForm(false)}>Mégse</button>
+          <button className="admin-form-save" onClick={handleAdd}>
+            Mentés
+          </button>
+          <button
+            className="admin-form-cancel"
+            onClick={() => setShowAddForm(false)}
+          >
+            Mégse
+          </button>
         </div>
       </div>
     </div>
@@ -224,16 +262,32 @@ function AdminStatisticsPage() {
             <td>{r.FastestLap ? "⚡" : ""}</td>
             <td>{r.GpOrSprint}</td>
             <td className="admin-driver-actions">
-              <button className="admin-edit-btn" onClick={() => setEditR({ ...r })}>
+              <button
+                className="admin-edit-btn"
+                onClick={() => setEditR({ ...r })}
+              >
                 ✏️
               </button>
               {deleteConfirmId === r.ResultID ? (
                 <>
-                  <button className="admin-form-save" onClick={() => handleDelete(r.ResultID)}>Biztos?</button>
-                  <button className="admin-form-cancel" onClick={() => setDeleteConfirmId(null)}>Mégse</button>
+                  <button
+                    className="admin-form-save"
+                    onClick={() => handleDelete(r.ResultID)}
+                  >
+                    Biztos?
+                  </button>
+                  <button
+                    className="admin-form-cancel"
+                    onClick={() => setDeleteConfirmId(null)}
+                  >
+                    Mégse
+                  </button>
                 </>
               ) : (
-                <button className="admin-delete-btn" onClick={() => setDeleteConfirmId(r.ResultID)}>
+                <button
+                  className="admin-delete-btn"
+                  onClick={() => setDeleteConfirmId(r.ResultID)}
+                >
                   🗑
                 </button>
               )}
@@ -248,12 +302,24 @@ function AdminStatisticsPage() {
     <div className="modal-overlay" onClick={() => setEditR(null)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Szerkesztés</h2>
-        {(["GrandPrixID", "DriverID", "ConstructorID", "Position", "Grid", "Laps", "TimeOrRetired", "Points", "GpOrSprint"] as (keyof RaceResult)[]).map((field) => (
+        {(
+          [
+            "GrandPrixID",
+            "DriverID",
+            "ConstructorID",
+            "Position",
+            "Grid",
+            "Laps",
+            "TimeOrRetired",
+            "Points",
+            "GpOrSprint",
+          ] as (keyof RaceResult)[]
+        ).map((field) => (
           <div className="admin-form-group" key={field}>
             <label>{field}</label>
             <input
               type={NUMBER_FIELDS.includes(field as string) ? "number" : "text"}
-              value={editR![field] as string | number ?? ""}
+              value={(editR![field] as string | number) ?? ""}
               onChange={(e) => setEditR({ ...editR!, [field]: e.target.value })}
             />
           </div>
@@ -263,9 +329,11 @@ function AdminStatisticsPage() {
             <input
               type="checkbox"
               checked={editR!.FastestLap}
-              onChange={(e) => setEditR({ ...editR!, FastestLap: e.target.checked })}
-            />
-            {" "}Fastest Lap
+              onChange={(e) =>
+                setEditR({ ...editR!, FastestLap: e.target.checked })
+              }
+            />{" "}
+            Fastest Lap
           </label>
         </div>
         <div className="modal-buttons">
@@ -281,14 +349,19 @@ function AdminStatisticsPage() {
   return (
     <div className="admin-form-page">
       <div className="admin-driver-container">
-
         <div className="admin-driver-header">
           <h1>Statistics Management</h1>
           <div style={{ display: "flex", gap: "1rem" }}>
-            <button className="admin-add-btn" onClick={() => setShowAddForm(!showAddForm)}>
+            <button
+              className="admin-add-btn"
+              onClick={() => setShowAddForm(!showAddForm)}
+            >
               {showAddForm ? "✕ Bezár" : "+ Add Race Result"}
             </button>
-            <button className="admin-form-cancel" onClick={() => navigate("/statistics")}>
+            <button
+              className="admin-form-cancel"
+              onClick={() => navigate("/statistics")}
+            >
               ← Vissza
             </button>
           </div>
@@ -297,7 +370,6 @@ function AdminStatisticsPage() {
         {showAddForm && renderAddForm()}
         {loading ? <div className="loading">Betöltés...</div> : renderTable()}
         {editR && renderEditModal()}
-
       </div>
     </div>
   );

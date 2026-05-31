@@ -19,15 +19,15 @@ interface Constructor {
 }
 
 const constructorColors: Record<number, string> = {
-  1:  "linear-gradient(135deg, #0d2747 0%, #c8102e 100%)",
-  2:  "linear-gradient(135deg, #460202 0%, #a6051a 100%)",
-  3:  "linear-gradient(135deg, #25412b 0%, #00e6cf 100%)",
-  4:  "linear-gradient(135deg, #1a1a1a 0%, #ff8000 100%)",
-  5:  "radial-gradient(circle at bottom right, #00665e 0%, #003a33 50%)",
-  6:  "linear-gradient(135deg, #fd0ae9 0%, #0066ff 80%)",
-  7:  "radial-gradient(circle at bottom right, #e8e8e8 0%, #003087 50%)",
-  8:  "linear-gradient(135deg, #1a1a2e 0%, #4778af 100%)",
-  9:  "linear-gradient(135deg, #00ff22 0%, #000000 100%)",
+  1: "linear-gradient(135deg, #0d2747 0%, #c8102e 100%)",
+  2: "linear-gradient(135deg, #460202 0%, #a6051a 100%)",
+  3: "linear-gradient(135deg, #25412b 0%, #00e6cf 100%)",
+  4: "linear-gradient(135deg, #1a1a1a 0%, #ff8000 100%)",
+  5: "radial-gradient(circle at bottom right, #00665e 0%, #003a33 50%)",
+  6: "linear-gradient(135deg, #fd0ae9 0%, #0066ff 80%)",
+  7: "radial-gradient(circle at bottom right, #e8e8e8 0%, #003087 50%)",
+  8: "linear-gradient(135deg, #1a1a2e 0%, #4778af 100%)",
+  9: "linear-gradient(135deg, #00ff22 0%, #000000 100%)",
   10: "linear-gradient(135deg, #1a1a1a 0%, #b6babd 100%)",
 };
 
@@ -41,12 +41,16 @@ function DriverDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const driverRes = await fetch(`http://127.0.0.1:8000/api/driver/${id}`);
+        const driverRes = await fetch(
+          `formulaonestatwebapp-production.up.railway.app/api/driver/${id}`,
+        );
         const driverData = await driverRes.json();
         setDriver(driverData);
 
         if (driverData?.ConstructorID) {
-          const cRes = await fetch(`http://127.0.0.1:8000/api/constructor/${driverData.ConstructorID}`);
+          const cRes = await fetch(
+            `formulaonestatwebapp-production.up.railway.app/api/constructor/${driverData.ConstructorID}`,
+          );
           const cData = await cRes.json();
           setConstructor(cData);
         }
@@ -83,7 +87,9 @@ function DriverDetailPage() {
           {constructor && (
             <div
               className="driver-detail-team"
-              onClick={() => navigate(`/constructor/${constructor.ConstructorID}`)}
+              onClick={() =>
+                navigate(`/constructor/${constructor.ConstructorID}`)
+              }
               style={{ cursor: "pointer", textDecoration: "underline" }}
             >
               {constructor.Name}
@@ -100,7 +106,9 @@ function DriverDetailPage() {
       <div className="driver-detail-stats">
         <div className="driver-detail-card">
           <div className="driver-detail-label">Born </div>
-          <div className="driver-detail-value">{formatDate(driver.BirthDate)}</div>
+          <div className="driver-detail-value">
+            {formatDate(driver.BirthDate)}
+          </div>
         </div>
         <div className="driver-detail-card">
           <div className="driver-detail-label">Nationality </div>
@@ -108,14 +116,21 @@ function DriverDetailPage() {
         </div>
         <div
           className="driver-detail-card team-card"
-          onClick={() => constructor && navigate(`/constructor/${constructor.ConstructorID}`)}
+          onClick={() =>
+            constructor && navigate(`/constructor/${constructor.ConstructorID}`)
+          }
           style={{
             cursor: constructor ? "pointer" : "default",
-            background: constructor ? constructorColors[constructor.ConstructorID] : "#1a1a1a",
+            background: constructor
+              ? constructorColors[constructor.ConstructorID]
+              : "#1a1a1a",
             border: "none",
           }}
         >
-          <div className="driver-detail-label" style={{ color: "rgba(255,255,255,0.85)" }}>
+          <div
+            className="driver-detail-label"
+            style={{ color: "rgba(255,255,255,0.85)" }}
+          >
             Constructor
           </div>
           <div className="driver-detail-value" style={{ color: "#fff" }}>
