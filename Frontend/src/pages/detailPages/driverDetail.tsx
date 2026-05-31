@@ -42,14 +42,14 @@ function DriverDetailPage() {
     const fetchData = async () => {
       try {
         const driverRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/driver/${id}`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/driver/${id}`,
         );
         const driverData = await driverRes.json();
         setDriver(driverData);
 
         if (driverData?.ConstructorID) {
           const cRes = await fetch(
-            `formulaonestatwebapp-production.up.railway.app/api/constructor/${driverData.ConstructorID}`,
+            `https://formulaonestatwebapp-production.up.railway.app/api/constructor/${driverData.ConstructorID}`,
           );
           const cData = await cRes.json();
           setConstructor(cData);

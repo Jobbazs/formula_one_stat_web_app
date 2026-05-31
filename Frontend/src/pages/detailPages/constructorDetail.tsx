@@ -52,13 +52,13 @@ function ConstructorDetailPage() {
     const fetchData = async () => {
       try {
         const cRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/constructor/${id}`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/constructor/${id}`,
         );
         const cData = await cRes.json();
         setConstructor(cData);
 
         const dRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/driver`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/driver`,
         );
         const allDrivers = await dRes.json();
         setDrivers(

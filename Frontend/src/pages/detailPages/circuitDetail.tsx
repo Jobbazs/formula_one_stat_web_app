@@ -57,13 +57,13 @@ function CircuitDetailPage() {
     const fetchData = async () => {
       try {
         const cRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/circuit/${id}`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/circuit/${id}`,
         );
         const cData = await cRes.json();
         setCircuit(cData);
 
         const gpRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/grand_prix`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/grand_prix`,
         );
         const allGps = await gpRes.json();
         setRaces(allGps.filter((gp: GrandPrix) => gp.CircuitID === Number(id)));

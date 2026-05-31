@@ -87,21 +87,21 @@ function GrandPrixDetailPage() {
     const fetchData = async () => {
       try {
         const gpRes = await fetch(
-          `formulaonestatwebapp-production.up.railway.app/api/grand_prix/${id}`,
+          `https://formulaonestatwebapp-production.up.railway.app/api/grand_prix/${id}`,
         );
         const gpData = await gpRes.json();
         setGp(gpData);
 
         if (gpData?.CircuitID) {
           const cRes = await fetch(
-            `formulaonestatwebapp-production.up.railway.app/api/circuit/${gpData.CircuitID}`,
+            `https://formulaonestatwebapp-production.up.railway.app/api/circuit/${gpData.CircuitID}`,
           );
           setCircuit(await cRes.json());
         }
 
         if (gpData?.WinnerDriverID) {
           const dRes = await fetch(
-            `formulaonestatwebapp-production.up.railway.app/api/driver/${gpData.WinnerDriverID}`,
+            `https://formulaonestatwebapp-production.up.railway.app/api/driver/${gpData.WinnerDriverID}`,
           );
           setWinner(await dRes.json());
         }
