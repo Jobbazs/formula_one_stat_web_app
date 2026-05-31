@@ -75,10 +75,10 @@ function StatisticsPage({ isAdmin }: StatisticsPageProps) {
   const [constructorStats, setConstructorStats] =
     useState<ConstructorStats | null>(null);
   const [standings, setStandings] = useState<Standing[]>([]);
-  const [sthttps://formulaonestatwebapp-production.up.railway.app;
+  const [statsLoading, setStatsLoading] = useState(false);
 
   useEffect(() => {
-    fetch(https://formulaonestatwebapp-production.up.railway.app
+    fetch(
       "https://formulaonestatwebapp-production.up.railway.app/api/driver/",
     )
       .then((r) => r.json())
