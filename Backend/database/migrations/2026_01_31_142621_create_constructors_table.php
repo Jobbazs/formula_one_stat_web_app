@@ -14,19 +14,19 @@ return new class extends Migration
             $table->string('Name', 150)->unique();
             $table->string('Nationality', 50);
             $table->year('FoundedYear')->nullable();
-            $table->string('TeamPrincipal', 100)->nullable(); 
-            $table->unsignedInteger('Wins')->default(0); 
-            $table->unsignedInteger('PolePositions')->default(0); 
-            $table->unsignedInteger('Podiums')->default(0); 
-            $table->unsignedTinyInteger('WorldChampionships')->default(0); 
+            $table->string('TeamPrincipal', 100)->nullable();
+            $table->unsignedInteger('Wins')->default(0);
+            $table->unsignedInteger('PolePositions')->default(0);
+            $table->unsignedInteger('Podiums')->default(0);
+            $table->unsignedTinyInteger('WorldChampionships')->default(0);
             $table->text('History')->nullable()->default(null);
             $table->string('Image', 255)->default('');
             $table->timestamps();
         });
 
         DB::statement('ALTER TABLE constructors ADD CONSTRAINT chk_founded_year_min CHECK (FoundedYear IS NULL OR FoundedYear >= 1900)');
-        DB::statement('ALTER TABLE constructors ADD CONSTRAINT chk_name_not_empty CHECK (CHAR_LENGTH(TRIM(Name)) > 0)');
-        
+        DB::statement('ALTER TABLE constructors ADD CONSTRAINT chk_name_not_empty_constructor CHECK (CHAR_LENGTH(TRIM(Name)) > 0)');
+
         // Trigger a jövőbeli év ellenőrzéséhez
         DB::unprepared('
             CREATE TRIGGER check_founded_year_before_insert
@@ -52,7 +52,7 @@ return new class extends Migration
             END
         ');
     }
-    
+
     public function down(): void
     {
         DB::unprepared('DROP TRIGGER IF EXISTS check_founded_year_before_insert');

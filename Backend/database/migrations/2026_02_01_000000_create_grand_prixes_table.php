@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-           Schema::create('grandprix', function (Blueprint $table) {
+        Schema::create('grandprix', function (Blueprint $table) {
             $table->id('GrandPrixID');
             $table->string('Name', 150)->unique();
             $table->string('Country', 50);
@@ -22,26 +22,25 @@ return new class extends Migration
             $table->string('Image', 255)->default('');
 
             $table->foreign('CircuitID')
-                  ->references('CircuitID')
-                  ->on('circuits')
-                  ->nullOnDelete()
-                  ->cascadeOnUpdate();
+                ->references('CircuitID')
+                ->on('circuits')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreign('WinnerDriverID')
-                  ->references('DriverID')
-                  ->on('drivers')
-                  ->nullOnDelete()
-                  ->cascadeOnUpdate();
+                ->references('DriverID')
+                ->on('drivers')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
         });
 
         // 1. Év nem lehet a jövőben
         DB::statement('ALTER TABLE grandprix ADD CONSTRAINT chk_year_not_future CHECK (Year <= 2026)');
-        
+
         // 2. Név nem lehet üres
-        DB::statement('ALTER TABLE grandprix ADD CONSTRAINT chk_name_not_empty CHECK (CHAR_LENGTH(TRIM(Name)) > 0)');
-    
+        DB::statement('ALTER TABLE grandprix ADD CONSTRAINT chk_name_not_empty_grandprix CHECK (CHAR_LENGTH(TRIM(Name)) > 0)');
     }
-  
+
     /**
      * Reverse the migrations.
      */
