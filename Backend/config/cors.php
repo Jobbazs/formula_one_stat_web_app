@@ -19,7 +19,10 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://formulaonestatweb-k3aza3756-jobbazs-projects.vercel.app'],
+    'allowed_origins' => [
+        'https://formulaonestatweb-a1nr9usa2-jobbazs-projects.vercel.app',
+        'https://formulaonestatweb-k3aza3756-jobbazs-projects.vercel.app',
+    ],
 
     'allowed_origins_patterns' => [],
 
