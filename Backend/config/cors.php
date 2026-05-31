@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    'allowed_origins' => ['https://formulaonestatweb-k3aza3756-jobbazs-projects.vercel.app'],
 
     'allowed_origins_patterns' => [],
 
