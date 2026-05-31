@@ -1,1 +1,1 @@
-web: php artisan optimize:clear && php artisan migrate:fresh --seed --force && frankenphp php-server -r public/
+web: php artisan optimize:clear && php artisan migrate:fresh --seed --force && frankenphp php-server --listen :$PORT -r public/
