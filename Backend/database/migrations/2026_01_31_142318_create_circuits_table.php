@@ -25,7 +25,7 @@ return new class extends Migration
 
         
         DB::statement('ALTER TABLE circuits ADD CONSTRAINT chk_circuit_length CHECK (Length IS NULL OR Length > 0)');
-        DB::statement('ALTER TABLE circuits ADD CONSTRAINT chk_laps_positive CHECK (Laps IS NULL OR Laps > 0)');
+        DB::statement('ALTER TABLE circuits ADD CONSTRAINT chk_laps_positive_circuits CHECK (Laps IS NULL OR Laps > 0)');
         DB::statement('ALTER TABLE circuits ADD CONSTRAINT chk_circuit_name CHECK (CHAR_LENGTH(TRIM(Name)) > 0)');
         DB::statement('ALTER TABLE circuits ADD CONSTRAINT chk_first_gp_year CHECK (FirstGrandPrix IS NULL OR (FirstGrandPrix >= 1900 AND FirstGrandPrix <= 2026))');
     }

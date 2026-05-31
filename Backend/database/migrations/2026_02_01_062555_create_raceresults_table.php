@@ -55,7 +55,7 @@ return new class extends Migration
         DB::statement('ALTER TABLE race_result ADD CONSTRAINT chk_grid_positive CHECK (Grid IS NULL OR Grid > 0)');
 
         // 4. Megtett körök pozitív
-        DB::statement('ALTER TABLE race_result ADD CONSTRAINT chk_laps_positive CHECK (Laps IS NULL OR Laps >= 0)');
+        DB::statement('ALTER TABLE race_result ADD CONSTRAINT chk_laps_positive_raceresult CHECK (Laps IS NULL OR Laps >= 0)');
     }
 
     public function down(): void
